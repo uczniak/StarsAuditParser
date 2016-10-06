@@ -29,7 +29,7 @@ end_rb = float(data[-1][13]
 rakeback = end_rb - start_rb
 
 for row in data[2:]:
-    if "[#?SpinGo#]" in row[3]:
+    if ("[#?SpinGo#]" in row[3]) or ("Spin & Go" in row[3]):
         if '(' in row[5]:
             count += 1
         delta = float(row[5]
