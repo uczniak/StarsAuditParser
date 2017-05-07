@@ -1,4 +1,7 @@
 from lxml.html import parse
+from datetime import datetime
+
+START_DATE = datetime(day=6, month=7, year=2016)
 
 def print_count_by_stakes(cnt):
     res = ""
@@ -17,6 +20,13 @@ rows = page.xpath("body/table")[0].findall("tr")
 data = []
 
 for row in rows:
+    datum = [c.text_content() for c in row.getchildren()]
+    try:
+        timestamp = datetime.strptime(datum[0][:10], '%d/%m/%Y')
+        if timestamp < START_DATE:
+            continue
+    except:
+        pass
     data.append([c.text_content() for c in row.getchildren()])
 
 count = 0
